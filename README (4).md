@@ -122,22 +122,18 @@ Then open your browser at
 ### 📘 Architecture Overview
 
 Below is the architecture representing:
-- Streamlit UI
-- LangChain & LlamaIndex FastAPI backends
+- FastApi Powered by Gemini
 - Docker container orchestration
 - AWS EC2 deployment layer
 
-<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/43340618-4347-42b6-b40b-aab926dd1a0b" />
+<img width="1536" height="1024" alt="image" src="https://github.com/anuradha2504/IC-Text-generation-Chatbot-AWS-Docker/blob/main/System-architecture-flow-Story-generation-aws.png" />
 
 ---
-
 
 ## 🏁 Live Demo
 
 🌍 **Deployed Endpoint:**  
 [http://34.228.167.130:8501](http://34.228.167.130:8501)
-
-🧠 Try both **LangChain** and **LlamaIndex** models from the dropdown in the UI.
 
 
 ---
