@@ -71,29 +71,27 @@ sudo docker run -d -p 8001:8001 gemini-story-api
 Then open your browser at  
 http://16.171.139.199:8001/docs/
 
----
-
 ## ☁️ AWS EC2 Deployment (Free Tier Eligible)
 
 1. Launch an **Ubuntu 24.04 EC2 Instance (t2.micro)**  
 2. SSH into instance  
-3. Install Docker  
+3. Install Docker
+   
    ```bash
    sudo apt update && sudo apt install docker.io -y
    sudo apt update
    sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
-   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs)stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
   sudo apt update
   sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
   sudo systemctl start docker
   sudo systemctl enable docker
   sudo docker --version
-
    ```
 4. Copy project files using **WinSCP** or **git clone**
    Copy app.py, Dockerfile, and requirements.txt to the server.
-6. Build & Run Docker  
+6. Build & Run Docker . Add **Inbound Rules** to Security Group   
    ```bash
    docker build -t gemini-story-api .
    docker run -d -p 8001:8001 gemini-story-api
