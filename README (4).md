@@ -1,53 +1,41 @@
-# 🤖 Conversational Chatbot & Local LLM Text Generation Service
+# 🤖 AI Story Generator API (Gemini 2.0 Flash)
 
-A full-stack **Conversational Chatbot** and **Text Generation Service** built using **LangChain**, **LlamaIndex**, and **FastAPI**, featuring a **Streamlit UI**.  
-The entire solution is containerized with **Docker** and deployed on **AWS EC2** for scalable cloud-based inference.
+A lightweight, high-performance **Text Generation Service** built using **FastAPI** and powered by Google's **Gemini 2.0 Flash** model.
+The solution is containerized with **Docker** and designed for deployment on **AWS EC2** for scalable cloud-based inference.
 
 ---
 
 ## 🚀 Features
 
-- 💬 Conversational chatbot UI powered by **Streamlit**
-- 🧠 Toggle between **LangChain** and **LlamaIndex** backend APIs
-- ⚡️ **FastAPI** microservices for each framework  
-  - Port **8000** → LangChain  
-  - Port **8001** → LlamaIndex  
-- 🐳 Single **Docker container** runs both APIs + Streamlit UI
-- 🔐 Secure **API key management** via `.streamlit/secrets.toml`
-- ☁️ Fully **deployed on AWS EC2** with public endpoint
-
+- 💬 Story Generator API
+- ⚡️ **FastAPI Backend**: High-performance, asynchronous REST API.
+- 🤖 **Gemini 2.0 Flash**: Utilizes Google's latest model for rapid story generation.
+- 🐳 **Dockerized**: Fully containerized for consistent deployment.
+- ☁️ **AWS EC2 Ready**: Configured for public cloud access.
+- 🔌 **Simple Endpoint**: Clean JSON-based API for generating creative content.
 ---
 
 ## 🧩 Technology Stack
 
 | Layer | Technology | Description |
 |-------|-------------|-------------|
-| Frontend | Streamlit | Interactive chat UI |
-| Backend APIs | FastAPI | RESTful microservices for chat endpoints |
-| Frameworks | LangChain, LlamaIndex | Conversational memory & LLM orchestration |
-| Model | OpenAI GPT-3.5-Turbo | Language generation |
-| Packaging | Docker, Supervisor | Multi-service containerization |
+| Framework | FastAPI | RESTful API framework |
+| Model | Gemini 2.0 Flash | Generative AI Model by Google |
+| Language | Python 3.11 | Runtime environment |
+| Packaging | Docker | Containerization |
 | Cloud | AWS EC2 (Ubuntu 24.04) | Hosting and deployment |
-| Environment | Python 3.11 | Runtime base |
 
 ---
 
 ## 🧱 Project Structure
 
 ```
-├── app.py                  # Streamlit frontend with model switch
-├── lang_chat.py            # FastAPI app for LangChain
-├── llamaindex_chat.py      # FastAPI app for LlamaIndex
-├── requirements.txt        # Dependencies
-├── Dockerfile              # Container setup (Streamlit + APIs)
+├── app.py                  # Main FastAPI application with Gemini integration
+├── requirements.txt        # Python dependencies (fastapi,requests,etc.)
+├── Dockerfile              # Docker build configuration.Container setup ( APIs)
 ├── supervisord.conf        # Manages multiple processes
-├── .streamlit/
-│   └── secrets.toml        # Stores API keys securely
 └── README.md               # Documentation
 ```
-
----
-
 ## ⚙️ Setup & Local Run
 
 ### 1️⃣ Add Your API Key
@@ -55,6 +43,23 @@ Create `.streamlit/secrets.toml` and include:
 ```toml
 OPENAI_API_KEY = "YOUR_API_KEY"
 ```
+Since this is a headless API (no UI), you interact with it using HTTP requests (Postman, cURL, or Python scripts).
+
+### **Endpoint:** `POST /generate-story`
+
+**Request Body:**
+```json
+{
+  "prompt": "A brave knight fighting a dragon in space",
+  "max_tokens": 500
+}
+**Response:**
+JSON
+
+{
+  "story": "Once upon a time in a galaxy far, far away..."
+}
+
 
 ### 2️⃣ Install Requirements
 ```bash
@@ -161,3 +166,4 @@ Below is the architecture representing:
 🛡️ **License:** MIT License © 2025 — Open for educational and research use
 
 ---
+
