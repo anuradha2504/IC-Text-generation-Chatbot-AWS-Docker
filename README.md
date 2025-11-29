@@ -100,10 +100,6 @@ http://16.171.139.199:8001/docs/
 8. Add **Inbound Rules** to Security Group  
    - TCP 22 → SSH (Your IP only)  
    - Allow TCP Port 8001 (Custom TCP) from 0.0.0.0/0.
-
-✅ Access at:  
-**http://<your-ec2-public-ip>/docs**
-
 ---
 
 ## 🧠 Technical Architecture
