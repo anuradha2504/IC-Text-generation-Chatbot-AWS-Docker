@@ -39,27 +39,9 @@ The solution is containerized with **Docker** and designed for deployment on **A
 ## ⚙️ Setup & Local Run
 
 ### 1️⃣ Add Your API Key
-Create `.streamlit/secrets.toml` and include:
-```toml
+----
 OPENAI_API_KEY = "YOUR_API_KEY"
 ```
-Since this is a headless API (no UI), you interact with it using HTTP requests (Postman, cURL, or Python scripts).
-
-### **Endpoint:** `POST /generate-story`
-
-**Request Body:**
-```json
-{
-  "prompt": "A brave knight fighting a dragon in space",
-  "max_tokens": 500
-}
-**Response:**
-JSON
-
-{
-  "story": "Once upon a time in a galaxy far, far away..."
-}
-
 
 ### 2️⃣ Install Requirements
 ```bash
@@ -72,9 +54,6 @@ python lang_chat.py    # Runs LangChain API on port 8000
 python llamaindex_chat.py  # Runs LlamaIndex API on port 8001
 streamlit run app.py   # Runs Streamlit UI on port 8501
 ```
-
-Access at 👉 **http://localhost:8501**
-
 ---
 
 ## 🐳 Docker Deployment
@@ -90,7 +69,8 @@ sudo docker run -d -p 8001:8001 gemini-story-api
 ```
 
 Then open your browser at  
-👉 **http://16.171.139.199:8001/docs/**
+http://16.171.139.199:8001/docs/
+
 ---
 
 ## ☁️ AWS EC2 Deployment (Free Tier Eligible)
@@ -100,19 +80,30 @@ Then open your browser at
 3. Install Docker  
    ```bash
    sudo apt update && sudo apt install docker.io -y
+   sudo apt update
+   sudo apt install -y apt-transport-https ca-certificates curl software-properties-common
+   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+   echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+  sudo apt update
+  sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+  sudo systemctl start docker
+  sudo systemctl enable docker
+  sudo docker --version
+
    ```
-4. Copy project files using **WinSCP** or **git clone**  
-5. Build & Run Docker  
+4. Copy project files using **WinSCP** or **git clone**
+   Copy app.py, Dockerfile, and requirements.txt to the server.
+6. Build & Run Docker  
    ```bash
-   docker build -t ai-frameworks-chatbot .
-   docker run -d -p 8501:8501 -p 8000:8000 -p 8001:8001 ai-frameworks-chatbot
+   docker build -t gemini-story-api .
+   docker run -d -p 8001:8001 gemini-story-api
    ```
-6. Add **Inbound Rules** to Security Group  
+7. Add **Inbound Rules** to Security Group  
    - TCP 22 → SSH (Your IP only)  
-   - TCP 8501, 8000, 8001 → 0.0.0.0/0  
+   - Allow TCP Port 8001 (Custom TCP) from 0.0.0.0/0.
 
 ✅ Access at:  
-**http://<your-ec2-public-ip>:8501**
+**http://<your-ec2-public-ip>/docs**
 
 ---
 
@@ -142,11 +133,17 @@ End Point -16.171.139.199:8001/docs/
 ---
 
 **🧠 Application Logic**
+
 The application uses a straightforward architecture:
+
 FastAPI receives the StoryRequest (prompt + token limit).
+
 The app constructs a payload for the Google Gemini API.
+
 It authenticates using the API Key configured in app.py.
+
 It sends a POST request to generativelanguage.googleapis.com.
+
 The generated text is extracted and returned as JSON.
 
 ## 🔐 Security Notes
