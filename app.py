@@ -5,7 +5,7 @@ import os
 
 app = FastAPI()
 
-GEMINI_API_KEY = "AIzaSyCX9pifK5eJflcN3tfBSbUjun4fh4wDxQc"
+GEMINI_API_KEY = "YOUR_APT_KEY"
 GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
 
 class StoryRequest(BaseModel):
@@ -41,3 +41,4 @@ def generate_story(request: StoryRequest):
     story_text = data.get("candidates", [{}])[0].get("content", {}).get("parts", [{}])[0].get("text", "")
 
     return {"story": story_text}
+
