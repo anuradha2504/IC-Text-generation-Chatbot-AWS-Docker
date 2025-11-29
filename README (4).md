@@ -129,39 +129,30 @@ Below is the architecture representing:
 
 ---
 
-
 🌍 **Deployed Endpoint:**  
-
 End Point -16.171.139.199:8001/docs/
-
 
 ---
 
 ## 📚 Example Output
 
 ### 🔹 Output responses
-<img width="680" alt="LangChain Chat" src="https://github.com/anuradha2504/IC-Text-generation-Chatbot-AWS-Docker/blob/main/AWS_deployment.docx" />
+<img width="680" alt="OutPut Response" src="https://github.com/anuradha2504/IC-Text-generation-Chatbot-AWS-Docker/blob/main/AWS_deployment.docx" />
 
 ---
 
-🧠 Application Logic
+**🧠 Application Logic**
 The application uses a straightforward architecture:
-
 FastAPI receives the StoryRequest (prompt + token limit).
-
 The app constructs a payload for the Google Gemini API.
-
 It authenticates using the API Key configured in app.py.
-
 It sends a POST request to generativelanguage.googleapis.com.
-
 The generated text is extracted and returned as JSON.
 
 ## 🔐 Security Notes
 
 - ✅ API Keys are **never hardcoded** 
 - ✅ AWS-level network security (controlled inbound rules)
-
 ---
 
 ## 📄 Repository & License
